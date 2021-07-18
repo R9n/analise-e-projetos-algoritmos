@@ -24,9 +24,10 @@ class BubbleSort
         Stopwatch stopwatch = new Stopwatch();
 
         stopwatch.Start();
+        statistics.numberOfComparisons++;
         if (elements.Count <= 1 || elements == null)
         {
-            statistics.numberOfComparisons += 2;
+            statistics.numberOfComparisons++;
         }
         else
         {

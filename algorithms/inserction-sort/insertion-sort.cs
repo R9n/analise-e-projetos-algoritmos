@@ -46,6 +46,7 @@ class InsertionSort
         {
             current = array[i];
             j = i;
+            statistics.numberOfComparisons++;
             while ((j > 0) && CompareInsertionSort.compareElements(array[j - 1], current, dataType))
             {
                 statistics.numberOfComparisons++;

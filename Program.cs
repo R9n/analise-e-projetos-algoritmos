@@ -53,7 +53,9 @@ namespace trabalho
                         Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
                         Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
                         Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
-
+                        mergeSortStatistics.printStatics();
+                        quickSortStatistics.printStatics();
+                        heapSortStatistics.printStatics();
 
                     }
                 }

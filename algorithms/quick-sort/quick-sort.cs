@@ -23,9 +23,11 @@ class QuickSort
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+
+        statistics.numberOfComparisons++;
         if (elements.Count <= 1 || elements == null)
         {
-            statistics.numberOfComparisons += 2;
+            statistics.numberOfComparisons++;
         }
         else
         {
@@ -39,9 +41,9 @@ class QuickSort
 
     private void sort(dynamic[] array, string dataType, int low, int high)
     {
+        statistics.numberOfComparisons++;
         if (low < high)
         {
-            statistics.numberOfComparisons++;
             int partIndex = partition(array, dataType, low, high);
             sort(array, dataType, low, partIndex - 1);
             sort(array, dataType, partIndex + 1, high);
@@ -59,7 +61,6 @@ class QuickSort
             statistics.numberOfComparisons++;
             if (CompareQuickSort.compareElements(arr[j], p, dataType))
             {
-                statistics.numberOfComparisons++;
                 i++;
                 temp = arr[i];
                 arr[i] = arr[j];
