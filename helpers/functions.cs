@@ -52,32 +52,65 @@ class Functions
     public static dynamic generateRandomArrays(dynamic config)
     {
         List<dynamic> instanceData = new List<dynamic>();
+
+        MergeSort mergeSort = new MergeSort();
+        Statistics sortedStatistics;
+
         for (int k = 0; k < config.data.Count; k++)
         {
             dynamic data = config.data[k];
 
-            Instance instance = new Instance();
-            instance.dataType = data.dataType;
+            Instance unsortedInstance = new Instance();
+            Instance sortedInstance = new Instance();
+
+            unsortedInstance.dataType = data.dataType;
+            sortedInstance.dataType = data.dataType;
 
             if (data.dataType == DataTypes.number)
             {
+
                 dynamic sizes = data.arraysSizes;
-                List<dynamic> arrays = new List<dynamic>();
+                List<dynamic> unsortedArrays = new List<dynamic>();
+                List<dynamic> sortedArrays = new List<dynamic>();
 
                 for (int i = 0; i < sizes.Count; i++)
                 {
-                    List<dynamic> newArray = new List<dynamic>();
                     Int64 arrayLenght = sizes[i];
+
+                    List<dynamic> randomDoubles = new List<dynamic>();
+                    List<dynamic> randomIntegers = new List<dynamic>();
+                    byte[] randomBytes = new byte[Constraints.maxByteArraySize];
+
+                    List<dynamic> sortedDoubles = new List<dynamic>();
+                    List<dynamic> sortedIntegers = new List<dynamic>();
+                    byte[] sortedBytes = new byte[Constraints.maxByteArraySize];
+
+
+                    _random.NextBytes(randomBytes);
+
                     for (int j = 0; j < arrayLenght; j++)
                     {
-                        newArray.Add(_random.NextDouble() * arrayLenght);
+                        randomDoubles.Add(_random.NextDouble() * arrayLenght);
+                        randomIntegers.Add(_random.Next());
                     }
-                    arrays.Add(newArray);
+
+                    unsortedArrays.Add(randomDoubles);
+                    unsortedArrays.Add(randomIntegers);
+                    unsortedArrays.Add(randomBytes);
+
+                    sortedStatistics = mergeSort.mergeSort(randomDoubles, "number");
+                    sortedArrays.Add(sortedStatistics.sortedArray);
+
+                    sortedStatistics = mergeSort.mergeSort(randomIntegers, "number");
+                    sortedArrays.Add(sortedStatistics.sortedArray);
+
                 }
-                instance.data = arrays;
+                unsortedInstance.data.Add(unsortedArrays);
+                sortedInstance.data.Add(sortedArrays);
             }
 
-            instanceData.Add(instance);
+            instanceData.Add(unsortedInstance);
+            instanceData.Add(sortedInstance);
         }
         return instanceData;
     }

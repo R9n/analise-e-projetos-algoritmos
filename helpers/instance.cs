@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 class Instance
 {
-    public string dataType;
+    public string dataType = "";
 
-    public List<dynamic> data;
+    public List<dynamic> data = new List<dynamic>();
 
 }

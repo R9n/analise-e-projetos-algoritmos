@@ -46,16 +46,16 @@ namespace trabalho
                     string dataType = loadedInstances[i].dataType;
                     for (int k = 0; k < loadedInstances[i].data.Count; k++)
                     {
-                        Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
-                        Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
-                        Statistics mergeSortStatistics = mergeSort.mergeSort(loadedInstances[i].data[k], dataType);
-                        Statistics insertionSortStatistics = insertionSort.insertionSort(loadedInstances[i].data[k], dataType);
-                        Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
-                        Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
-                        Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
-                        mergeSortStatistics.printStatics();
-                        quickSortStatistics.printStatics();
-                        heapSortStatistics.printStatics();
+                        // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
+                        // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
+                        // Statistics mergeSortStatistics = mergeSort.mergeSort(loadedInstances[i].data[k], dataType);
+                        // Statistics insertionSortStatistics = insertionSort.insertionSort(loadedInstances[i].data[k], dataType);
+                        // Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
+                        // Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
+                        // Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
+                        // mergeSortStatistics.printStatics();
+                        // quickSortStatistics.printStatics();
+                        // heapSortStatistics.printStatics();
 
                     }
                 }
