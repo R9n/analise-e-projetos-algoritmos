@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+
 class Instance
 {
     public string dataType = "";
@@ -11,5 +12,7 @@ class Instance
     public List<dynamic> inversedSortedData = new List<dynamic>();
 
     public List<dynamic> noRepeatedElements = new List<dynamic>();
+
+
 
 }

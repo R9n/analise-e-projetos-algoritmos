@@ -52,6 +52,7 @@ namespace trabalho
                     Functions.showMessage(instance.numberType);
                     Statistics quickSortStatistics = quickSort.quickSort(instance.noRepeatedElements, instance.dataType);
                     quickSortStatistics.printStatics();
+                    quickSortStatistics.writeStatisticsToDisc(instance);
                 }
 
 

@@ -1,0 +1,14 @@
+algorithmName:Quicksort
+numberOfComparisons:39
+totalTimeOfExecution:00:00:00.0130232
+dataType:number
+numberType:integer
+instanceSize:10
+===================================
+algorithmName:Quicksort
+numberOfComparisons:43
+totalTimeOfExecution:00:00:00.0000076
+dataType:number
+numberType:double
+instanceSize:10
+===================================
