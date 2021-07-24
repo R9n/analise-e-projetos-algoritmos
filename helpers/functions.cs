@@ -52,65 +52,82 @@ class Functions
     public static dynamic generateRandomArrays(dynamic config)
     {
         List<dynamic> instanceData = new List<dynamic>();
-
         MergeSort mergeSort = new MergeSort();
-        Statistics sortedStatistics;
+        Statistics sortedDoublesStatistics;
+        Statistics sortedIntegersStatistics;
+        Statistics sortedBytesStatistics;
+
 
         for (int k = 0; k < config.data.Count; k++)
         {
             dynamic data = config.data[k];
 
-            Instance unsortedInstance = new Instance();
-            Instance sortedInstance = new Instance();
 
-            unsortedInstance.dataType = data.dataType;
-            sortedInstance.dataType = data.dataType;
+            Instance integersInstance = new Instance();
+            Instance doubleInstance = new Instance();
+            Instance bytesInstance = new Instance();
+
+            integersInstance.dataType = data.dataType;
+            doubleInstance.dataType = data.dataType;
+            bytesInstance.dataType = data.dataType;
+
+            integersInstance.numberType = "integer";
+            doubleInstance.numberType = "double";
+            bytesInstance.numberType = "bytes";
 
             if (data.dataType == DataTypes.number)
             {
-
                 dynamic sizes = data.arraysSizes;
-                List<dynamic> unsortedArrays = new List<dynamic>();
-                List<dynamic> sortedArrays = new List<dynamic>();
 
                 for (int i = 0; i < sizes.Count; i++)
                 {
+
                     Int64 arrayLenght = sizes[i];
 
-                    List<dynamic> randomDoubles = new List<dynamic>();
-                    List<dynamic> randomIntegers = new List<dynamic>();
-                    byte[] randomBytes = new byte[Constraints.maxByteArraySize];
-
-                    List<dynamic> sortedDoubles = new List<dynamic>();
-                    List<dynamic> sortedIntegers = new List<dynamic>();
-                    byte[] sortedBytes = new byte[Constraints.maxByteArraySize];
-
-
+                    byte[] randomBytes = new byte[arrayLenght];
                     _random.NextBytes(randomBytes);
 
                     for (int j = 0; j < arrayLenght; j++)
                     {
-                        randomDoubles.Add(_random.NextDouble() * arrayLenght);
-                        randomIntegers.Add(_random.Next());
+                        doubleInstance.unsortedData.Add(_random.NextDouble() * arrayLenght);
+                        integersInstance.unsortedData.Add(_random.Next());
+                        bytesInstance.unsortedData.Add(randomBytes[j]);
                     }
 
-                    unsortedArrays.Add(randomDoubles);
-                    unsortedArrays.Add(randomIntegers);
-                    unsortedArrays.Add(randomBytes);
 
-                    sortedStatistics = mergeSort.mergeSort(randomDoubles, "number");
-                    sortedArrays.Add(sortedStatistics.sortedArray);
+                    sortedDoublesStatistics = mergeSort.mergeSort(doubleInstance.unsortedData, "number");
+                    sortedIntegersStatistics = mergeSort.mergeSort(integersInstance.unsortedData, "number");
+                    sortedBytesStatistics = mergeSort.mergeSort(bytesInstance.unsortedData, "number");
 
-                    sortedStatistics = mergeSort.mergeSort(randomIntegers, "number");
-                    sortedArrays.Add(sortedStatistics.sortedArray);
 
+                    for (int t = 0; t < sortedDoublesStatistics.sortedArray.Length - 1; t++)
+                    {
+                        doubleInstance.sortedData.Add(sortedDoublesStatistics.sortedArray[t]);
+                        integersInstance.sortedData.Add(sortedDoublesStatistics.sortedArray[t]);
+                        bytesInstance.sortedData.Add(sortedBytesStatistics.sortedArray[t]);
+                    }
+
+
+                    for (Int64 t = arrayLenght - 1; t > 0; t--)
+                    {
+
+                        integersInstance.inversedSortedData.Add(sortedIntegersStatistics.sortedArray[t]);
+                        doubleInstance.inversedSortedData.Add(sortedDoublesStatistics.sortedArray[t]);
+                        bytesInstance.inversedSortedData.Add(sortedBytesStatistics.sortedArray[t]);
+
+                    }
+
+                    sortedDoublesStatistics = null;
+                    sortedIntegersStatistics = null;
+                    sortedBytesStatistics = null;
                 }
-                unsortedInstance.data.Add(unsortedArrays);
-                sortedInstance.data.Add(sortedArrays);
+
             }
 
-            instanceData.Add(unsortedInstance);
-            instanceData.Add(sortedInstance);
+            instanceData.Add(integersInstance);
+            instanceData.Add(doubleInstance);
+            instanceData.Add(bytesInstance);
+
         }
         return instanceData;
     }

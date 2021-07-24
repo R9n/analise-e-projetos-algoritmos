@@ -4,6 +4,10 @@ class Instance
 {
     public string dataType = "";
 
-    public List<dynamic> data = new List<dynamic>();
+    public string numberType = "";
+
+    public List<dynamic> sortedData = new List<dynamic>();
+    public List<dynamic> unsortedData = new List<dynamic>();
+    public List<dynamic> inversedSortedData = new List<dynamic>();
 
 }

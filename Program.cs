@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace trabalho
 {
@@ -8,7 +10,9 @@ namespace trabalho
         {
 
             Console.WriteLine(Messages.loadingConfig);
+
             dynamic config = Functions.loadConfig();
+
             QuickSort quickSort = new QuickSort();
             SelectionSort selectionSort = new SelectionSort();
             MergeSort mergeSort = new MergeSort();
@@ -16,6 +20,8 @@ namespace trabalho
             HeapSort heapSort = new HeapSort();
             BubbleSort bubbleSort = new BubbleSort();
             BogoSort bogoSort = new BogoSort();
+
+            List<dynamic> sortedInstances = new List<dynamic>();
 
             if (!Functions.isValidConfig(config))
             {
@@ -41,24 +47,26 @@ namespace trabalho
                     continue;
                 }
 
-                for (int i = 0; i < loadedInstances.Count; i++)
+                foreach (Instance instance in loadedInstances)
                 {
-                    string dataType = loadedInstances[i].dataType;
-                    for (int k = 0; k < loadedInstances[i].data.Count; k++)
-                    {
-                        // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
-                        // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
-                        // Statistics mergeSortStatistics = mergeSort.mergeSort(loadedInstances[i].data[k], dataType);
-                        // Statistics insertionSortStatistics = insertionSort.insertionSort(loadedInstances[i].data[k], dataType);
-                        // Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
-                        // Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
-                        // Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
-                        // mergeSortStatistics.printStatics();
-                        // quickSortStatistics.printStatics();
-                        // heapSortStatistics.printStatics();
-
-                    }
+                    Functions.showMessage(instance.numberType);
+                    Statistics quickSortStatistics = quickSort.quickSort(instance.unsortedData, instance.dataType);
+                    quickSortStatistics.printStatics();
                 }
+
+
+                // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
+                // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
+                // Statistics mergeSortStatistics = mergeSort.mergeSort(loadedInstances[i].data[k], dataType);
+                // Statistics insertionSortStatistics = insertionSort.insertionSort(loadedInstances[i].data[k], dataType);
+                // Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
+                // Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
+                // Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
+                // mergeSortStatistics.printStatics();
+                // quickSortStatistics.printStatics();
+                // heapSortStatistics.printStatics();
+
+
             }
 
         }
