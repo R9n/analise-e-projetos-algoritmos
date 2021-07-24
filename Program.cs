@@ -50,7 +50,7 @@ namespace trabalho
                 foreach (Instance instance in loadedInstances)
                 {
                     Functions.showMessage(instance.numberType);
-                    Statistics quickSortStatistics = quickSort.quickSort(instance.unsortedData, instance.dataType);
+                    Statistics quickSortStatistics = quickSort.quickSort(instance.noRepeatedElements, instance.dataType);
                     quickSortStatistics.printStatics();
                 }
 

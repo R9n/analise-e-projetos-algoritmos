@@ -85,6 +85,7 @@ class Functions
                     Int64 arrayLenght = sizes[i];
 
                     byte[] randomBytes = new byte[arrayLenght];
+
                     _random.NextBytes(randomBytes);
 
                     for (int j = 0; j < arrayLenght; j++)
@@ -93,6 +94,15 @@ class Functions
                         integersInstance.unsortedData.Add(_random.Next());
                         bytesInstance.unsortedData.Add(randomBytes[j]);
                     }
+
+
+                    //
+                    for (int j = 0; j < arrayLenght; j++)
+                    {
+                        doubleInstance.noRepeatedElements.Add(getNonRepeatedElement(doubleInstance.noRepeatedElements, "double", arrayLenght));
+                        integersInstance.noRepeatedElements.Add(getNonRepeatedElement(integersInstance.noRepeatedElements, "integer", arrayLenght));
+                    }
+
 
 
                     sortedDoublesStatistics = mergeSort.mergeSort(doubleInstance.unsortedData, "number");
@@ -143,6 +153,43 @@ class Functions
     }
 
 
+    public static dynamic getNonRepeatedElement(List<dynamic> array, string numberType, Int64 maxDouble)
+    {
+        dynamic value = null;
+
+        switch (numberType)
+        {
+            case "double":
+                {
+                    while (value == null)
+                    {
+                        dynamic randomValue = _random.NextDouble() * maxDouble;
+                        if (!array.Contains(randomValue))
+                        {
+                            value = randomValue;
+                        }
+                    }
+                    break;
+                }
+
+            case "integer":
+                {
+                    while (value == null)
+                    {
+                        dynamic randomValue = _random.Next();
+                        if (!array.Contains(randomValue))
+                        {
+                            value = randomValue;
+                        }
+
+                    }
+                    break;
+                }
+
+        }
+        return value;
+
+    }
 
 
 
