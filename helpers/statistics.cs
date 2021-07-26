@@ -28,9 +28,11 @@ class Statistics
     }
 
 
-    public async void writeStatisticsToDisc(Instance instance)
+    public async Task<string> writeStatisticsToDisc(Instance instance, string dataStat)
     {
-        string resultsPath = "results/instance-of-" + this.sortedArray.Length.ToString() + "-elements.txt";
+
+        string resultsPath = @"results/instance-of-" +
+            this.sortedArray.Length.ToString() + "-elements.txt";
 
         string instanceSeparator = "===================================";
 
@@ -40,6 +42,7 @@ class Statistics
         string dataType = "dataType:" + instance.dataType;
         string numberType = "numberType:" + instance.numberType;
         string instanceSize = "instanceSize:" + this.sortedArray.Length;
+        string dataState = "dataState:" + dataStat;
 
 
         using StreamWriter file = new(resultsPath, append: true);
@@ -50,9 +53,11 @@ class Statistics
         await file.WriteLineAsync(dataType);
         await file.WriteLineAsync(numberType);
         await file.WriteLineAsync(instanceSize);
+        await file.WriteLineAsync(dataState);
         await file.WriteLineAsync(instanceSeparator);
 
 
 
+        return resultsPath;
     }
 }

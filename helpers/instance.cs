@@ -7,6 +7,7 @@ class Instance
 
     public string numberType = "";
 
+
     public List<dynamic> sortedData = new List<dynamic>();
     public List<dynamic> unsortedData = new List<dynamic>();
     public List<dynamic> inversedSortedData = new List<dynamic>();

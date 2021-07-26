@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Windows.Input;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using Microsoft.Scripting.Hosting;
+using IronPython.Hosting;
+using System.IO;
 
 namespace trabalho
 {
@@ -9,6 +13,12 @@ namespace trabalho
         static void Main(string[] args)
         {
 
+            runMain();
+
+        }
+
+        static async void runMain()
+        {
             Console.WriteLine(Messages.loadingConfig);
 
             dynamic config = Functions.loadConfig();
@@ -47,14 +57,19 @@ namespace trabalho
                     continue;
                 }
 
+                Directory.Delete("results/", true);
+                Directory.CreateDirectory("results/");
                 foreach (Instance instance in loadedInstances)
                 {
                     Functions.showMessage(instance.numberType);
                     Statistics quickSortStatistics = quickSort.quickSort(instance.noRepeatedElements, instance.dataType);
                     quickSortStatistics.printStatics();
-                    quickSortStatistics.writeStatisticsToDisc(instance);
+                    await quickSortStatistics.writeStatisticsToDisc(instance, DataStates.NOTREPEATED);
                 }
 
+                ScriptEngine engine = Python.CreateEngine();
+                ScriptScope scope = engine.CreateScope();
+                engine.ExecuteFile("helpers/show-results.py", scope);
 
                 // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
                 // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
@@ -69,9 +84,7 @@ namespace trabalho
 
 
             }
-
         }
-
     }
 }
 
