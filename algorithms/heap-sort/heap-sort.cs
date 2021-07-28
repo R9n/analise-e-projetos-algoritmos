@@ -19,7 +19,7 @@ class HeapSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Inserction Sort";
+        statistics.algorithmName = "HeapSort";
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();

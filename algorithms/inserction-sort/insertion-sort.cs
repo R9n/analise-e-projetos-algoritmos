@@ -19,7 +19,7 @@ class InsertionSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Inserction Sort";
+        statistics.algorithmName = "InserctionSort";
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();

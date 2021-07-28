@@ -19,7 +19,7 @@ class BubbleSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Bubble Sort";
+        statistics.algorithmName = "BubbleSort";
 
         Stopwatch stopwatch = new Stopwatch();
 

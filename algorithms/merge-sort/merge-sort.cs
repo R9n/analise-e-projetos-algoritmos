@@ -12,7 +12,6 @@ class MergeSort
     {
         dynamic[] sortedArray = new dynamic[elements.Count];
 
-
         for (int i = 0; i < elements.Count; i++)
         {
             sortedArray.SetValue(elements[i], i);
@@ -20,7 +19,7 @@ class MergeSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Merge Sort";
+        statistics.algorithmName = "MergeSort";
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();

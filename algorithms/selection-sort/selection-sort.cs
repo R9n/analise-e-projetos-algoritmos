@@ -20,7 +20,7 @@ class SelectionSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Selection Sort";
+        statistics.algorithmName = "SelectionSort";
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();

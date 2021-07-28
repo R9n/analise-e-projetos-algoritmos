@@ -59,12 +59,24 @@ namespace trabalho
 
                 Directory.Delete("results/", true);
                 Directory.CreateDirectory("results/");
-                foreach (Instance instance in loadedInstances)
+                foreach (dynamic instances in loadedInstances)
                 {
-                    Functions.showMessage(instance.numberType);
-                    Statistics quickSortStatistics = quickSort.quickSort(instance.noRepeatedElements, instance.dataType);
-                    quickSortStatistics.printStatics();
-                    await quickSortStatistics.writeStatisticsToDisc(instance, DataStates.NOTREPEATED);
+
+                    foreach (dynamic instance in instances)
+                    {
+                        List<dynamic> sortedData = instance.sortedData;
+                        List<dynamic> unsortedData = instance.unsortedData;
+                        List<dynamic> inversedSortedData = instance.inversedSortedData;
+                        List<dynamic> noRepeatedElements = instance.noRepeatedElements;
+
+                        Statistics quickSortStatistics = quickSort.quickSort(unsortedData, instance.dataType);
+
+                        await quickSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+
+
+                    }
+
+
                 }
 
                 ScriptEngine engine = Python.CreateEngine();

@@ -53,27 +53,19 @@ class Functions
     {
         List<dynamic> instanceData = new List<dynamic>();
         MergeSort mergeSort = new MergeSort();
-        Statistics sortedDoublesStatistics;
-        Statistics sortedIntegersStatistics;
-        Statistics sortedBytesStatistics;
 
 
         for (int k = 0; k < config.data.Count; k++)
         {
             dynamic data = config.data[k];
 
+            Statistics sortedDoublesStatistics;
+            Statistics sortedIntegersStatistics;
+            Statistics sortedBytesStatistics;
 
-            Instance integersInstance = new Instance();
-            Instance doubleInstance = new Instance();
-            Instance bytesInstance = new Instance();
-
-            integersInstance.dataType = data.dataType;
-            doubleInstance.dataType = data.dataType;
-            bytesInstance.dataType = data.dataType;
-
-            integersInstance.numberType = "integer";
-            doubleInstance.numberType = "double";
-            bytesInstance.numberType = "bytes";
+            List<dynamic> integerInstances = new List<dynamic>();
+            List<dynamic> doubleInstances = new List<dynamic>();
+            List<dynamic> bytesInstances = new List<dynamic>();
 
             if (data.dataType == DataTypes.number)
             {
@@ -81,6 +73,17 @@ class Functions
 
                 for (int i = 0; i < sizes.Count; i++)
                 {
+                    Instance integersInstance = new Instance();
+                    Instance doubleInstance = new Instance();
+                    Instance bytesInstance = new Instance();
+
+                    integersInstance.dataType = data.dataType;
+                    doubleInstance.dataType = data.dataType;
+                    bytesInstance.dataType = data.dataType;
+
+                    integersInstance.numberType = "integer";
+                    doubleInstance.numberType = "double";
+                    bytesInstance.numberType = "bytes";
 
                     Int64 arrayLenght = sizes[i];
 
@@ -110,6 +113,7 @@ class Functions
                     sortedBytesStatistics = mergeSort.mergeSort(bytesInstance.unsortedData, "number");
 
 
+
                     for (int t = 0; t < sortedDoublesStatistics.sortedArray.Length - 1; t++)
                     {
                         doubleInstance.sortedData.Add(sortedDoublesStatistics.sortedArray[t]);
@@ -127,17 +131,21 @@ class Functions
 
                     }
 
+
+                    integerInstances.Add(integersInstance);
+                    doubleInstances.Add(doubleInstance);
+                    bytesInstances.Add(bytesInstance);
+
                     sortedDoublesStatistics = null;
                     sortedIntegersStatistics = null;
                     sortedBytesStatistics = null;
                 }
 
+
             }
-
-            instanceData.Add(integersInstance);
-            instanceData.Add(doubleInstance);
-            instanceData.Add(bytesInstance);
-
+            instanceData.Add(integerInstances);
+            instanceData.Add(doubleInstances);
+            instanceData.Add(bytesInstances);
         }
         return instanceData;
     }

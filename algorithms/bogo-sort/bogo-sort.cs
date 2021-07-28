@@ -19,7 +19,7 @@ class BogoSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "Bogo Sort";
+        statistics.algorithmName = "BogoSort";
 
         Stopwatch stopwatch = new Stopwatch();
 

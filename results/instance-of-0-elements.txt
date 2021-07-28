@@ -1,8 +1,0 @@
-algorithmName:Quicksort
-numberOfComparisons:2
-totalTimeOfExecution:00:00:00.0000002
-dataType:number
-numberType:bytes
-instanceSize:0
-dataState:notrepeated
-===================================
