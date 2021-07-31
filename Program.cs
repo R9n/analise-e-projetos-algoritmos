@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.Scripting.Hosting;
 using IronPython.Hosting;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace trabalho
 {
@@ -58,6 +59,11 @@ namespace trabalho
                     continue;
                 }
 
+
+
+
+
+
                 Directory.Delete("results/", true);
                 Directory.CreateDirectory("results/");
                 foreach (dynamic instances in loadedInstances)
@@ -93,40 +99,51 @@ namespace trabalho
 
                 }
 
+
+
                 ScriptEngine engine = Python.CreateEngine();
                 ScriptScope scope = engine.CreateScope();
                 var paths = engine.GetSearchPaths();
 
-              
+
                 paths.Add("/usr/bin/python");
                 paths.Add("/usr/lib");
 
                 engine.SetSearchPaths(paths);
 
-                 var paths2 = engine.GetSearchPaths();
+                var paths2 = engine.GetSearchPaths();
 
                 try
                 {
-                   
-                   // engine.ExecuteFile("helpers/show-results.py", scope);
+                    Process proc = new System.Diagnostics.Process();
+                    string command = "python helpers/show-results.py";
+
+
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    {
+                        proc.StartInfo.FileName = "/bin/bash";
+                        proc.StartInfo.Arguments = "-c \" " + command + " \"";
+                    }
+
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        proc.StartInfo.FileName = "cmd";
+                        proc.StartInfo.Arguments = "-c \" " + command + " \"";
+                    }
+
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.StartInfo.RedirectStandardOutput = true;
+                    proc.Start();
+
+
+
+
+                    // engine.ExecuteFile("helpers/show-results.py", scope);
                 }
                 catch (Exception error)
                 {
                     Console.WriteLine(error);
                 }
-
-
-
-                // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
-                // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);
-                // Statistics mergeSortStatistics = mergeSort.mergeSort(loadedInstances[i].data[k], dataType);
-                // Statistics insertionSortStatistics = insertionSort.insertionSort(loadedInstances[i].data[k], dataType);
-                // Statistics heapSortStatistics = heapSort.heapSort(loadedInstances[i].data[k], dataType);
-                // Statistics bubbleStatistics = bubbleSort.bubbleSort(loadedInstances[i].data[k], dataType);
-                // Statistics bogoSortStatistics = bogoSort.bogosort(loadedInstances[i].data[k], dataType);
-                // mergeSortStatistics.printStatics();
-                // quickSortStatistics.printStatics();
-                // heapSortStatistics.printStatics();
 
 
             }

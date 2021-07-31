@@ -1,14 +1,10 @@
 
 import sys
-sys.path.append(r'/usr/bin/python')
-sys.path.append(r'/usr/lib')
-sys.path.append(r'/usr/lib/python3.9/site-packages')
-sys.path.append(r'/usr/lib/python2.7/site-packages')
+
 
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-
 
 
 bogoSortBytes = []
@@ -143,7 +139,7 @@ def plot2(instancesOne, instancesTwo):
         print(instance["numberOfComparisons"])
 
     fig, ax = plt.subplots()
-    ax.plot(instanceSizesOne, numberOfComparisonsOne)
+    ax.plot(np.array(instanceSizesOne), np.array(numberOfComparisonsTwo))
 
     ax.set(xlabel='time (s)', ylabel='voltage (mV)',
            title='About as simple as it gets, folks')
@@ -191,7 +187,7 @@ for statistic in statistics:
                 bubbleSortDouble.append(instance)
             else:
                 bogoSortDouble.append(instance)
-         
+
         elif (instance["numberType"] == 'integer'):
             if(instance["algorithmName"] == 'SelectionSort'):
                 selectionSortInteger.append(instance)
