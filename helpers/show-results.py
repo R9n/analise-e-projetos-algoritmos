@@ -139,7 +139,7 @@ def plot2(instancesOne, instancesTwo):
         print(instance["numberOfComparisons"])
 
     fig, ax = plt.subplots()
-    ax.plot(np.array(instanceSizesOne), np.array(numberOfComparisonsTwo))
+    ax.plot([np.array(instanceSizesOne)], np.array(numberOfComparisonsTwo))
 
     ax.set(xlabel='time (s)', ylabel='voltage (mV)',
            title='About as simple as it gets, folks')

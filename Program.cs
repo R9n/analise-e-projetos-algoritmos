@@ -44,6 +44,8 @@ namespace trabalho
             dynamic loadedInstances = Functions.generateRandomArrays(config);
 
             string selectedOption = "";
+            string algorithmOne;
+            string algorithmTwo;
 
             Functions.clearConsoleAndShowMessage(Messages.mainMenu);
 
@@ -59,13 +61,9 @@ namespace trabalho
                     continue;
                 }
 
-
-
-
-
-
                 Directory.Delete("results/", true);
                 Directory.CreateDirectory("results/");
+
                 foreach (dynamic instances in loadedInstances)
                 {
 
@@ -76,43 +74,246 @@ namespace trabalho
                         List<dynamic> inversedSortedData = instance.inversedSortedData;
                         List<dynamic> noRepeatedElements = instance.noRepeatedElements;
 
-                        // dados não ordenados
-                        Statistics quickSortStatistics = quickSort.quickSort(unsortedData, instance.dataType);
-                        // Statistics selectionSortStatistics = selectionSort.selectionSort(unsortedData, instance.dataType);
-                        // Statistics mergeSortStatistics = mergeSort.mergeSort(unsortedData, instance.dataType);
-                        // Statistics insertionSortStatistics = insertionSort.insertionSort(unsortedData, instance.dataType);
-                        Statistics heapSortStatistics = heapSort.heapSort(unsortedData, instance.dataType);
-                        // Statistics bubbleStatistics = bubbleSort.bubbleSort(unsortedData, instance.dataType);
-                        // Statistics bogoSortStatistics = bogoSort.bogosort(unsortedData, instance.dataType);
+                        if (selectedOption == "1")
+                        {
+                            foreach (dynamic instances in loadedInstances)
+                            {
 
-                        await quickSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        // await selectionSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        // await mergeSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        // await insertionSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        await heapSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        // await bubbleStatistics.writeStatisticsToDisc(instance, "unsortedData");
-                        // await bogoSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                                foreach (dynamic instance in instances)
+                                {
+                                    List<dynamic> sortedData = instance.sortedData;
+                                    List<dynamic> unsortedData = instance.unsortedData;
+                                    List<dynamic> inversedSortedData = instance.inversedSortedData;
+                                    List<dynamic> noRepeatedElements = instance.noRepeatedElements;
+                                }
+                            }
+                            // dados não ordenados
+                            Statistics quickSortStatisticsUnsorted = quickSort.quickSort(unsortedData, instance.dataType);
+                            Statistics selectionSortStatisticsUnsorted = selectionSort.selectionSort(unsortedData, instance.dataType);
+                            Statistics mergeSortStatisticsUnsorted = mergeSort.mergeSort(unsortedData, instance.dataType);
+                            Statistics insertionSortStatisticsUnsorted = insertionSort.insertionSort(unsortedData, instance.dataType);
+                            Statistics heapSortStatisticsUnsorted = heapSort.heapSort(unsortedData, instance.dataType);
+                            Statistics bubbleStatisticsUnsorted = bubbleSort.bubbleSort(unsortedData, instance.dataType);
+                            Statistics bogoSortStatisticsUnsorted = bogoSort.bogosort(unsortedData, instance.dataType);
 
+                            //dados ordenados
+                            Statistics quickSortStatisticsSorted = quickSort.quickSort(unsortedData, instance.dataType);
+                            Statistics selectionSortStatisticsSorted = selectionSort.selectionSort(unsortedData, instance.dataType);
+                            Statistics mergeSortStatisticsSorted = mergeSort.mergeSort(unsortedData, instance.dataType);
+                            Statistics insertionSortStatisticsSorted = insertionSort.insertionSort(unsortedData, instance.dataType);
+                            Statistics heapSortStatisticsSorted = heapSort.heapSort(unsortedData, instance.dataType);
+                            Statistics bubbleStatisticsSorted = bubbleSort.bubbleSort(unsortedData, instance.dataType);
+                            Statistics bogoSortStatisticsSorted = bogoSort.bogosort(unsortedData, instance.dataType);
+
+                            //dados inversamente ordenados
+                            Statistics quickSortStatisticsReversedSorted = quickSort.quickSort(unsortedData, instance.dataType);
+                            Statistics selectionSortStatisticsReversedSorted = selectionSort.selectionSort(unsortedData, instance.dataType);
+                            Statistics mergeSortStatisticsReversedSorted = mergeSort.mergeSort(unsortedData, instance.dataType);
+                            Statistics insertionSortStatisticsReversedSorted = insertionSort.insertionSort(unsortedData, instance.dataType);
+                            Statistics heapSortStatisticsReversedSorted = heapSort.heapSort(unsortedData, instance.dataType);
+                            Statistics bubbleStatisticsReversedSorted = bubbleSort.bubbleSort(unsortedData, instance.dataType);
+                            Statistics bogoSortStatisticsReversedSorted = bogoSort.bogosort(unsortedData, instance.dataType);
+
+
+                            //dados não repetidos
+                            Statistics quickSortStatisticsNotRepeated = quickSort.quickSort(unsortedData, instance.dataType);
+                            Statistics selectionSortStatisticsNotRepeated = selectionSort.selectionSort(unsortedData, instance.dataType);
+                            Statistics mergeSortStatisticsNotRepeated = mergeSort.mergeSort(unsortedData, instance.dataType);
+                            Statistics insertionSortStatisticsNotRepeated = insertionSort.insertionSort(unsortedData, instance.dataType);
+                            Statistics heapSortStatisticsNotRepeated = heapSort.heapSort(unsortedData, instance.dataType);
+                            Statistics bubbleStatisticsNotRepeated = bubbleSort.bubbleSort(unsortedData, instance.dataType);
+                            Statistics bogoSortStatisticsNotRepeated = bogoSort.bogosort(unsortedData, instance.dataType);
+
+
+
+
+                            await quickSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await selectionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await mergeSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await insertionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await heapSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await bubbleStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                            await bogoSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+
+
+                            await quickSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await selectionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await mergeSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await insertionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await heapSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await bubbleStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                            await bogoSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+
+
+                            await quickSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await selectionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await mergeSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await insertionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await heapSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await bubbleStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+                            await bogoSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+
+                            await quickSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await selectionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await mergeSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await insertionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await heapSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await bubbleStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                            await bogoSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+
+                        }
+                        if (selectedOption == "2")
+                        {
+
+                            Console.WriteLine(Messages.selectAlgorithm);
+                            algorithmOne = Console.ReadLine();
+
+                            Console.WriteLine(Messages.selectAlgorithm);
+                            algorithmTwo = Console.ReadLine();
+
+
+                            switch (algorithmOne)
+                            {
+                                case AlgorithmsTypes.Quicksort:
+                                    {
+                                        await quickSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await quickSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await quickSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await quickSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.BogoSort:
+                                    await bogoSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                    await bogoSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                    await bogoSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                    await bogoSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                    {
+                                        break;
+                                    }
+                                case AlgorithmsTypes.BubbleSort:
+                                    {
+                                        await bubbleStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await bubbleStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await bubbleStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await bubbleStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.MergeSort:
+                                    {
+                                        await mergeSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await mergeSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await mergeSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await mergeSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.SelectionSort:
+                                    {
+                                        await selectionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await selectionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await selectionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await selectionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.HeapSort:
+                                    {
+                                        await heapSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await heapSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await heapSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await heapSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.InsertionSort:
+                                    {
+                                        await insertionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await insertionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await insertionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await insertionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                            }
+
+
+                            switch (algorithmTwo)
+                            {
+                                case AlgorithmsTypes.Quicksort:
+                                    {
+                                        await quickSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await quickSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await quickSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await quickSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.BogoSort:
+                                    await bogoSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                    await bogoSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                    await bogoSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                    await bogoSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                    {
+                                        break;
+                                    }
+                                case AlgorithmsTypes.BubbleSort:
+                                    {
+                                        await bubbleStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await bubbleStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await bubbleStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await bubbleStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.MergeSort:
+                                    {
+                                        await mergeSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await mergeSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await mergeSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await mergeSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.SelectionSort:
+                                    {
+                                        await selectionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await selectionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await selectionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await selectionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.HeapSort:
+                                    {
+                                        await heapSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await heapSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await heapSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await heapSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                                case AlgorithmsTypes.InsertionSort:
+                                    {
+                                        await insertionSortStatisticsSorted.writeStatisticsToDisc(instance, "sorted");
+                                        await insertionSortStatisticsUnsorted.writeStatisticsToDisc(instance, "unsorted");
+                                        await insertionSortStatisticsNotRepeated.writeStatisticsToDisc(instance, "not-repeated");
+                                        await insertionSortStatisticsReversedSorted.writeStatisticsToDisc(instance, "reversed-sorted");
+
+                                        break;
+                                    }
+                            }
+
+                        }
 
                     }
 
 
                 }
-
-
-
-                ScriptEngine engine = Python.CreateEngine();
-                ScriptScope scope = engine.CreateScope();
-                var paths = engine.GetSearchPaths();
-
-
-                paths.Add("/usr/bin/python");
-                paths.Add("/usr/lib");
-
-                engine.SetSearchPaths(paths);
-
-                var paths2 = engine.GetSearchPaths();
-
                 try
                 {
                     Process proc = new System.Diagnostics.Process();
@@ -135,15 +336,14 @@ namespace trabalho
                     proc.StartInfo.RedirectStandardOutput = true;
                     proc.Start();
 
-
-
-
                     // engine.ExecuteFile("helpers/show-results.py", scope);
                 }
                 catch (Exception error)
                 {
                     Console.WriteLine(error);
                 }
+
+
 
 
             }

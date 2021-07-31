@@ -34,10 +34,19 @@ class Messages
 
     public static string selectAnOption = @"Digite:
       1) Para comparar executar e comparar todos os algoritmos.
-      2) Para selecionar e comparar 2 algoritmos especcíficos.";
+      2) Para selecionar e comparar 2 algoritmos específicos.";
 
 
     public static string invalidOption = @"Opção inválida";
+
+    public static string selectAlgorithm = @"Digite:
+      1) Para selecionar o quicksort.
+      2) Para selecionar o heapsort
+      3) Para selecionar o bogosort
+      4) Para selecionar o mergesort
+      5) Para selecionar o bubblesort
+      6) Para selecionar o inserctionsort
+      7) Para selecionar o selectionsort";
 
 }
 
