@@ -19,22 +19,24 @@ class InsertionSort
         }
 
         this.statistics = new Statistics();
-        statistics.algorithmName = "InserctionSort";
+        this.statistics.algorithmName = "InserctionSort";
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+
         if (elements.Count <= 1 || elements == null)
         {
-            statistics.numberOfComparisons += 2;
+            this.statistics.numberOfComparisons += 2;
         }
         else
         {
+            this.statistics.numberOfComparisons = 0;
             sort(sortedArray, 0, sortedArray.Length - 1, dataType);
         }
-        stopwatch.Start();
-        statistics.totalTimeOfExecution = stopwatch.Elapsed;
-        statistics.sortedArray = sortedArray;
-        return statistics;
+        stopwatch.Stop();
+        this.statistics.totalTimeOfExecution = stopwatch.Elapsed;
+        this.statistics.sortedArray = sortedArray;
+        return this.statistics;
     }
 
     private void sort(dynamic[] array, int left, int right, string dataType)
@@ -46,10 +48,10 @@ class InsertionSort
         {
             current = array[i];
             j = i;
-            statistics.numberOfComparisons++;
+            this.statistics.numberOfComparisons++;
             while ((j > 0) && CompareInsertionSort.compareElements(array[j - 1], current, dataType))
             {
-                statistics.numberOfComparisons++;
+                this.statistics.numberOfComparisons++;
 
                 array[j] = array[j - 1];
                 j = j - 1;

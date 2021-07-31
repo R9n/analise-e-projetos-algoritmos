@@ -23,7 +23,8 @@ class HeapSort
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
-        statistics.numberOfComparisons++;
+        this.statistics.numberOfComparisons = 0;
+        this.statistics.numberOfComparisons++;
         if (elements.Count <= 1 || elements == null)
         {
             statistics.numberOfComparisons++;
@@ -32,9 +33,9 @@ class HeapSort
         {
             sort(sortedArray, dataType);
         }
-        stopwatch.Start();
-        statistics.totalTimeOfExecution = stopwatch.Elapsed;
-        statistics.sortedArray = sortedArray;
+        stopwatch.Stop();
+        this.statistics.totalTimeOfExecution = stopwatch.Elapsed;
+        this.statistics.sortedArray = sortedArray;
         return statistics;
     }
 
@@ -70,7 +71,7 @@ class HeapSort
     {
         int max = 2 * pos + 1;
         int right = max + 1;
-        statistics.numberOfComparisons++;
+        this.statistics.numberOfComparisons++;
         if (CompareHeapSort.compareElements(max, n, dataType, "less"))
         {
             statistics.numberOfComparisons++;
@@ -78,11 +79,11 @@ class HeapSort
                 CompareHeapSort.compareElements(v[max], v[right], dataType, "less")
             )
             {
-                statistics.numberOfComparisons++;
+                this.statistics.numberOfComparisons++;
                 max = right;
             }
 
-            statistics.numberOfComparisons++;
+            this.statistics.numberOfComparisons++;
             if (CompareHeapSort.compareElements(v[max], v[pos], dataType, "greater"))
             {
                 swap(v, max, pos);

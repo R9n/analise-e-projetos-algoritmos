@@ -1,35 +1,51 @@
-import os
-import matplotlib.pyplot as plt
-import numpy as np
-# algorithmName:Quicksort
-# numberOfComparisons:37
-# totalTimeOfExecution:00:00:00.0111925
-# dataType:number
-# numberType:integer
-# instanceSize:10
-# dataState:notrepeated
-# ===================================
-# algorithmName:Quicksort
-# numberOfComparisons:34
-# totalTimeOfExecution:00:00:00.0000163
-# dataType:number
-# numberType:double
-# instanceSize:10
-# dataState:notrepeated
-# =======================
 
-bogoSort = []
-bubbleSort = []
-heapSort = []
-inserctionSort = []
-mergeSort = []
-quickSort = []
-selectionSort = []
-instances = []
+import sys
+sys.path.append(r'/usr/bin/python')
+sys.path.append(r'/usr/lib')
+sys.path.append(r'/usr/lib/python3.9/site-packages')
+sys.path.append(r'/usr/lib/python2.7/site-packages')
+
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+bogoSortBytes = []
+bubbleSortBytes = []
+heapSortBytes = []
+inserctionSortBytes = []
+mergeSortBytes = []
+quickSortBytes = []
+selectionSortBytes = []
+instancesBytes = []
+
+bogoSortInteger = []
+bubbleSortInteger = []
+heapSortInteger = []
+inserctionSortInteger = []
+mergeSortInteger = []
+quickSortInteger = []
+selectionSortInteger = []
+instancesInteger = []
+
+bogoSortDouble = []
+bubbleSortDouble = []
+heapSortDouble = []
+inserctionSortDouble = []
+mergeSortDouble = []
+quickSortDouble = []
+selectionSortDouble = []
+instancesDouble = []
+
 
 statistics = os.listdir('results')
 dataArrayShift = 7
 instanceSeparator = "==================================="
+
+doublesStatistics = []
+integersStatistics = []
+bytesStatistics = []
 
 
 def plotGraphicComparison(instancesOne, instancesTwo):
@@ -43,6 +59,17 @@ def plotGraphicComparison(instancesOne, instancesTwo):
     numberOfComparisonsTwo = []
     algorithmNameTwo = instancesTwo[0]["algorithmName"]
 
+    for i in range(len(instancesOne), 0, -1):
+        for j in range(0, i - 1):
+            if (float(instancesTwo[j]["instanceSize"]) > float(instancesTwo[j+1]["instanceSize"])):
+                aux = instancesTwo[j]
+                instancesTwo[j] = instancesTwo[j + 1]
+                instancesTwo[j + 1] = aux
+            if (float(instancesOne[j]["instanceSize"]) > float(instancesOne[j+1]["instanceSize"])):
+                aux = instancesOne[j]
+                instancesOne[j] = instancesOne[j + 1]
+                instancesOne[j + 1] = aux
+
     for instance in instancesOne:
         instanceSizesOne.append(instance['instanceSize'])
         timesProcessingOne.append(instance["totalTimeOfExecution"])
@@ -52,15 +79,76 @@ def plotGraphicComparison(instancesOne, instancesTwo):
         instanceSizesTwo.append(instance['instanceSize'])
         timesProcessingTwo.append(instance["totalTimeOfExecution"])
         numberOfComparisonsTwo.append(instance["numberOfComparisons"])
+        print(instance["numberOfComparisons"])
 
     # Plot some data on the (implicit) axes.
-    plt.plot(instanceSizesOne, numberOfComparisonsOne, label=algorithmNameOne)
-    # etc.
-    plt.plot(instanceSizesTwo, numberOfComparisonsTwo, label=algorithmNameTwo)
-    plt.xlabel('Tamanho da instância')
-    plt.ylabel('Número de comparações')
-    plt.title("Número de comparações  realizadas")
-    plt.legend()
+
+    labels = instanceSizesOne
+    men_means = numberOfComparisonsOne
+    women_means = numberOfComparisonsTwo
+
+    x = np.arange(len(labels))  # the label locations
+    width = 0.35  # the width of the bars
+
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(x - width/2, men_means, width, label='Men')
+    rects2 = ax.bar(x + width/2, women_means, width, label='Women')
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by group and gender')
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+
+    fig.tight_layout()
+
+    plt.show()
+
+
+def plot2(instancesOne, instancesTwo):
+    instanceSizesOne = []
+    timesProcessingOne = []
+    numberOfComparisonsOne = []
+    algorithmNameOne = instancesOne[0]["algorithmName"]
+
+    instanceSizesTwo = []
+    timesProcessingTwo = []
+    numberOfComparisonsTwo = []
+    algorithmNameTwo = instancesTwo[0]["algorithmName"]
+
+    for i in range(len(instancesOne), 0, -1):
+        for j in range(0, i - 1):
+            if (float(instancesTwo[j]["instanceSize"]) > float(instancesTwo[j+1]["instanceSize"])):
+                aux = instancesTwo[j]
+                instancesTwo[j] = instancesTwo[j + 1]
+                instancesTwo[j + 1] = aux
+            if (float(instancesOne[j]["instanceSize"]) > float(instancesOne[j+1]["instanceSize"])):
+                aux = instancesOne[j]
+                instancesOne[j] = instancesOne[j + 1]
+                instancesOne[j + 1] = aux
+
+    for instance in instancesOne:
+        instanceSizesOne.append(instance['instanceSize'])
+        timesProcessingOne.append(instance["totalTimeOfExecution"])
+        numberOfComparisonsOne.append(instance["numberOfComparisons"])
+
+    for instance in instancesTwo:
+        instanceSizesTwo.append(instance['instanceSize'])
+        timesProcessingTwo.append(instance["totalTimeOfExecution"])
+        numberOfComparisonsTwo.append(instance["numberOfComparisons"])
+        print(instance["numberOfComparisons"])
+
+    fig, ax = plt.subplots()
+    ax.plot(instanceSizesOne, numberOfComparisonsOne)
+
+    ax.set(xlabel='time (s)', ylabel='voltage (mV)',
+           title='About as simple as it gets, folks')
+    ax.grid()
+
     plt.show()
 
 
@@ -75,8 +163,6 @@ for statistic in statistics:
             continue
         instance["algorithmName"] = currentLine.split(":")[1]
         currentLine = str(data.readline()).strip('\n')
-        print(currentLine)
-
         instance["numberOfComparisons"] = currentLine.split(":")[1]
         currentLine = str(data.readline()).strip('\n')
         instance["totalTimeOfExecution"] = currentLine.split(":")[1]
@@ -90,20 +176,54 @@ for statistic in statistics:
         instance["dataState"] = currentLine.split(":")[1]
         currentLine = str(data.readline()).strip('\n')
 
-        if(instance["algorithmName"] == 'SelectionSort'):
-            selectionSort.append(instance)
-        elif(instance["algorithmName"] == 'Quicksort'):
-            quickSort.append(instance)
-        elif(instance["algorithmName"] == 'MergeSort'):
-            mergeSort.append(instance)
-        elif(instance["algorithmName"] == 'InserctionSort'):
-            inserctionSort.append(instance)
-        elif(instance["algorithmName"] == 'HeapSort'):
-            heapSort.append(instance)
-        elif(instance["algorithmName"] == 'BubbleSort'):
-            bubbleSort.append(instance)
+        if (instance["numberType"] == 'double'):
+            if(instance["algorithmName"] == 'SelectionSort'):
+                selectionSortDouble.append(instance)
+            elif(instance["algorithmName"] == 'Quicksort'):
+                quickSortDouble.append(instance)
+            elif(instance["algorithmName"] == 'MergeSort'):
+                mergeSortDouble.append(instance)
+            elif(instance["algorithmName"] == 'InserctionSort'):
+                inserctionSortDouble.append(instance)
+            elif(instance["algorithmName"] == 'HeapSort'):
+                heapSortDouble.append(instance)
+            elif(instance["algorithmName"] == 'BubbleSort'):
+                bubbleSortDouble.append(instance)
+            else:
+                bogoSortDouble.append(instance)
+         
+        elif (instance["numberType"] == 'integer'):
+            if(instance["algorithmName"] == 'SelectionSort'):
+                selectionSortInteger.append(instance)
+            elif(instance["algorithmName"] == 'Quicksort'):
+                quickSortInteger.append(instance)
+            elif(instance["algorithmName"] == 'MergeSort'):
+                mergeSortInteger.append(instance)
+            elif(instance["algorithmName"] == 'InserctionSort'):
+                inserctionSortInteger.append(instance)
+            elif(instance["algorithmName"] == 'HeapSort'):
+                heapSortInteger.append(instance)
+            elif(instance["algorithmName"] == 'BubbleSort'):
+                bubbleSortInteger.append(instance)
+            else:
+                bogoSortInteger.append(instance)
         else:
-            bogoSort.append(instance)
+            if(instance["algorithmName"] == 'SelectionSort'):
+                selectionSortBytes.append(instance)
+            elif(instance["algorithmName"] == 'Quicksort'):
+                quickSortBytes.append(instance)
+            elif(instance["algorithmName"] == 'MergeSort'):
+                mergeSortBytes.append(instance)
+            elif(instance["algorithmName"] == 'InserctionSort'):
+                inserctionSortBytes.append(instance)
+            elif(instance["algorithmName"] == 'HeapSort'):
+                heapSortBytes.append(instance)
+            elif(instance["algorithmName"] == 'BubbleSort'):
+                bubbleSortBytes.append(instance)
+            else:
+                bogoSortDouble.append(instance)
 
-
-plotGraphicComparison(quickSort, quickSort)
+# plotGraphicComparison(quickSort, mergeSort)
+# plotGraphicComparison(mergeSort, inserctionSort)
+# plotGraphicComparison(quickSort, inserctionSort)
+plot2(quickSortDouble, heapSortDouble)

@@ -24,6 +24,7 @@ class SelectionSort
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+        this.statistics.numberOfComparisons = 0;
         statistics.numberOfComparisons++;
         if (elements.Count <= 1 || elements == null)
         {
@@ -33,7 +34,7 @@ class SelectionSort
         {
             sort(sortedArray, dataType);
         }
-        stopwatch.Start();
+        stopwatch.Stop();
         statistics.totalTimeOfExecution = stopwatch.Elapsed;
         statistics.sortedArray = sortedArray;
         return statistics;

@@ -31,17 +31,18 @@ class QuickSort
         }
         else
         {
+            this.statistics.numberOfComparisons = 0;
             sort(sortedArray, dataType, 0, sortedArray.Length - 1);
         }
-        stopwatch.Start();
-        statistics.totalTimeOfExecution = stopwatch.Elapsed;
-        statistics.sortedArray = sortedArray;
+        stopwatch.Stop();
+        this.statistics.totalTimeOfExecution = stopwatch.Elapsed;
+        this.statistics.sortedArray = sortedArray;
         return statistics;
     }
 
     private void sort(dynamic[] array, string dataType, int low, int high)
     {
-        statistics.numberOfComparisons++;
+        this.statistics.numberOfComparisons++;
         if (low < high)
         {
             int partIndex = partition(array, dataType, low, high);
@@ -58,7 +59,7 @@ class QuickSort
 
         for (int j = start; j <= end - 1; j++)
         {
-            statistics.numberOfComparisons++;
+            this.statistics.numberOfComparisons++;
             if (CompareQuickSort.compareElements(arr[j], p, dataType))
             {
                 i++;

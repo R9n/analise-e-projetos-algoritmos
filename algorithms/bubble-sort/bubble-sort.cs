@@ -24,18 +24,19 @@ class BubbleSort
         Stopwatch stopwatch = new Stopwatch();
 
         stopwatch.Start();
+        this.statistics.numberOfComparisons = 0;
         statistics.numberOfComparisons++;
         if (elements.Count <= 1 || elements == null)
         {
-            statistics.numberOfComparisons++;
+            this.statistics.numberOfComparisons++;
         }
         else
         {
             sort(sortedArray, dataType);
         }
-        stopwatch.Start();
-        statistics.totalTimeOfExecution = stopwatch.Elapsed;
-        statistics.sortedArray = sortedArray;
+        stopwatch.Stop();
+        this.statistics.totalTimeOfExecution = stopwatch.Elapsed;
+        this.statistics.sortedArray = sortedArray;
         return statistics;
     }
 

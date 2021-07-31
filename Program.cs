@@ -31,6 +31,7 @@ namespace trabalho
             BubbleSort bubbleSort = new BubbleSort();
             BogoSort bogoSort = new BogoSort();
 
+
             List<dynamic> sortedInstances = new List<dynamic>();
 
             if (!Functions.isValidConfig(config))
@@ -69,9 +70,22 @@ namespace trabalho
                         List<dynamic> inversedSortedData = instance.inversedSortedData;
                         List<dynamic> noRepeatedElements = instance.noRepeatedElements;
 
+                        // dados não ordenados
                         Statistics quickSortStatistics = quickSort.quickSort(unsortedData, instance.dataType);
+                        // Statistics selectionSortStatistics = selectionSort.selectionSort(unsortedData, instance.dataType);
+                        // Statistics mergeSortStatistics = mergeSort.mergeSort(unsortedData, instance.dataType);
+                        // Statistics insertionSortStatistics = insertionSort.insertionSort(unsortedData, instance.dataType);
+                        Statistics heapSortStatistics = heapSort.heapSort(unsortedData, instance.dataType);
+                        // Statistics bubbleStatistics = bubbleSort.bubbleSort(unsortedData, instance.dataType);
+                        // Statistics bogoSortStatistics = bogoSort.bogosort(unsortedData, instance.dataType);
 
                         await quickSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        // await selectionSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        // await mergeSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        // await insertionSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        await heapSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        // await bubbleStatistics.writeStatisticsToDisc(instance, "unsortedData");
+                        // await bogoSortStatistics.writeStatisticsToDisc(instance, "unsortedData");
 
 
                     }
@@ -81,7 +95,27 @@ namespace trabalho
 
                 ScriptEngine engine = Python.CreateEngine();
                 ScriptScope scope = engine.CreateScope();
-                engine.ExecuteFile("helpers/show-results.py", scope);
+                var paths = engine.GetSearchPaths();
+
+              
+                paths.Add("/usr/bin/python");
+                paths.Add("/usr/lib");
+
+                engine.SetSearchPaths(paths);
+
+                 var paths2 = engine.GetSearchPaths();
+
+                try
+                {
+                   
+                   // engine.ExecuteFile("helpers/show-results.py", scope);
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error);
+                }
+
+
 
                 // Statistics quickSortStatistics = quickSort.quickSort(loadedInstances[i].data[k], dataType);
                 // Statistics selectionSortStatistics = selectionSort.selectionSort(loadedInstances[i].data[k], dataType);

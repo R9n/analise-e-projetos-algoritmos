@@ -23,6 +23,7 @@ class MergeSort
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+        this.statistics.numberOfComparisons = 0;
         statistics.numberOfComparisons++;
 
         if (elements.Count <= 1 || elements == null)
@@ -33,7 +34,7 @@ class MergeSort
         {
             sort(sortedArray, 0, sortedArray.Length - 1, dataType);
         }
-        stopwatch.Start();
+        stopwatch.Stop();
         statistics.totalTimeOfExecution = stopwatch.Elapsed;
         statistics.sortedArray = sortedArray;
         return statistics;
@@ -41,7 +42,7 @@ class MergeSort
 
     private void sort(dynamic[] input, int left, int right, string dataType)
     {
-        statistics.numberOfComparisons++;
+        this.statistics.numberOfComparisons++;
         if (left < right)
         {
             int middle = (left + right) / 2;
@@ -66,7 +67,7 @@ class MergeSort
         int j = 0;
         for (int k = left; k < right + 1; k++)
         {
-            statistics.numberOfComparisons++;
+            this.statistics.numberOfComparisons++;
             if (i == leftArray.Length)
             {
                 input[k] = rightArray[j];
@@ -82,7 +83,7 @@ class MergeSort
                 }
                 else
                 {
-                    statistics.numberOfComparisons++;
+                    this.statistics.numberOfComparisons++;
                     if (CompareMergeSort.compareElements(leftArray[i], rightArray[j], dataType))
                     {
                         input[k] = leftArray[i];
