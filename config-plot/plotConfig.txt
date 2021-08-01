@@ -1,0 +1,6 @@
+selected
+quicksort
+heapsort
+time
+integer
+unsorted

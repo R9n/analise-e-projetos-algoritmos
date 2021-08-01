@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 class Functions
@@ -200,6 +201,29 @@ class Functions
     }
 
 
+    public static async Task<string> writePlotConfig(
+        string comparisonType,
+     string firstMethod,
+     string secondMethod,
+     string comparisonMetric,
+     string numberType,
+     string dataState)
+    {
+        string configPath = @"config-plot/plotConfig.txt";
 
+        Directory.Delete("config-plot/", true);
+        Directory.CreateDirectory("config-plot/");
+
+        using StreamWriter file = new(configPath, append: true);
+
+        await file.WriteLineAsync(comparisonType);
+        await file.WriteLineAsync(firstMethod);
+        await file.WriteLineAsync(secondMethod);
+        await file.WriteLineAsync(comparisonMetric);
+        await file.WriteLineAsync(numberType);
+        await file.WriteLineAsync(dataState);
+
+        return configPath;
+    }
 
 }
