@@ -1,0 +1,6 @@
+selected
+quicksort
+heapsort
+number-of-comparisons
+double
+sorted

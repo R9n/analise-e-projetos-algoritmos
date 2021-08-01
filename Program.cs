@@ -109,10 +109,6 @@ namespace trabalho
                 {
                     Console.WriteLine(error);
                 }
-
-
-
-
             }
         }
     }
